@@ -1,4 +1,4 @@
-const { repair, succeed } = require('./enhancer.js');
+const { repair, succeed, fail } = require('./enhancer.js');
 // test away!
 
 const brokenItem = {
@@ -43,7 +43,22 @@ describe('enhancer', () => {
         enhancedItem.durability
       );
     });
-    it.todo('check that item is an object');
-    it.todo('check that item have name, durability, and enhancement');
+  });
+  describe('fail', () => {
+    it('check item enhancement level', () => {
+      expect(fail(enhancedItem).enhancement).toEqual(enhancedItem.enhancement);
+      expect(fail(enhancedMaxItem).enhancement).toEqual(
+        enhancedMaxItem.enhancement
+      );
+    });
+    it('check item enhancement level < 15 decrease durability by 5', () => {
+      expect(fail(enhancedItem).durability).toEqual(45);
+    });
+    it('check item enhancement level >= 15 decrease durability by 10', () => {
+      expect(fail(enhancedMaxItem).durability).toEqual(40);
+    });
+    it('check item enhancement level > 16 decrease enhancement by 10', () => {
+      expect(fail(enhancedMaxItem).enhancement).toBeGreaterThan(16);
+    });
   });
 });
