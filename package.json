@@ -2,8 +2,11 @@
   "name": "webtesting-i-challenge",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "jest --watch --verbose"
+  },
   "repository": "https://github.com/gabada/webtesting-i-challenge.git",
-  "author": "Gill Abada <gill@callifi.com>",
+  "author": "Gill Abada",
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.7.1"
