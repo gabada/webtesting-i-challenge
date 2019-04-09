@@ -2,21 +2,46 @@ module.exports = {
   succeed,
   fail,
   repair,
-  get,
+  get
 };
 
 function succeed(item) {
-  return { ...item };
+  if (item.enhancement > 19) {
+    return { ...item };
+  } else {
+    return { ...item, enhancement: item.enhancement + 1 };
+  }
 }
 
 function fail(item) {
-  return { ...item };
+  if (item.enhancement < 15) {
+    return { ...item, durability: item.durability - 5 };
+  } else if (item.enhancement >= 15) {
+    return { ...item, durability: item.durability - 10 };
+  } else if (item.enhancement > 16) {
+    return {
+      ...item,
+      durability: item.durability - 10,
+      enhancement: item.enhancement - 10
+    };
+  } else {
+    return { ...item };
+  }
 }
 
 function repair(item) {
-  return { ...item };
+  const repairedItem = {
+    name: item.name,
+    durability: 100,
+    enhancement: item.enhancement
+  };
+  return repairedItem;
 }
 
 function get(item) {
-  return { ...item };
+  if (item.enhancement === 0) {
+    return { ...item };
+  } else {
+    return { ...item, name: '[+' + item.enhancement + ']' + item.name };
+  }
 }
